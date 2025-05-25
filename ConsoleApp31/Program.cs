@@ -13,7 +13,7 @@ namespace ConsoleApp31
 {
     internal class Program
     {
-        // Class-level lists - add these here
+     
         public static List<string> Names = new List<string>();
         public static List<int> Ages = new List<int>();
         public static List<string> EmploymentStatuses = new List<string>();
