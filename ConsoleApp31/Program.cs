@@ -28,54 +28,70 @@ namespace ConsoleApp31
         enum Menu
         {
             //Bruno Samartino
+
             Capture = 1,
             Check,
             FitForge,
             Exit
         }
+
         static void Main(string[] args)
         {
-          
-         
             bool yes = true;
 
             do
             {
-               
-                Console.WriteLine($"{(int)Menu.Capture}.Capture Yourself");
+                Console.WriteLine($"{(int)Menu.Capture}. Capture Yourself");
                 Console.WriteLine($"{(int)Menu.Check}. Check your information");
                 Console.WriteLine($"{(int)Menu.FitForge}. FitForge Qualify");
                 Console.WriteLine($"{(int)Menu.Exit}. Exit");
-                int choice = int.Parse(Console.ReadLine());
-                switch (choice)
+                Console.Write("Enter your choice (1-4): ");
+
+                string input = Console.ReadLine();
+                if (Enum.TryParse(input, out Menu choice) && Enum.IsDefined(typeof(Menu), choice))
                 {
-                    case 1:
-                        Capture();
-                        break;
-                    case 2:
-                        Check();
-                        break;
-                    case 3:
-                        Fitforge();
-                        break;
-                    case 4:
-                        Exit();
-                        break;
+                    switch (choice)
+                    {
+                        case Menu.Capture:
+                            Capture();
+                            break;
+                        case Menu.Check:
+                            Check();
+                            break;
+                        case Menu.FitForge:
+                            Fitforge();
+                            break;
+                        case Menu.Exit:
+                            Exit();
+                            break;
+                    }
                 }
-                Console.WriteLine("Would you like to redo this (Y/N)");
-                char redo = char.Parse(Console.ReadLine().ToUpper());
-                switch (redo)
+                else
                 {
-                    case 'Y':
-                        yes = true;
-                        break;
-                    case 'N':
-                        yes = false;
-                        Console.WriteLine("Thank you for using FitForge, Goodbye!");
-                        break;
+                    Console.WriteLine("Invalid input. Please enter a number between 1 and 4.");
                 }
-            }
-            while (yes);
+
+                if (choice != Menu.Exit)
+                {
+                    Console.WriteLine("Would you like to redo this (Y/N)");
+                    char redo = char.Parse(Console.ReadLine().ToUpper());
+                    switch (redo)
+                    {
+                        case 'Y':
+                            yes = true;
+                            break;
+                        case 'N':
+                            yes = false;
+                            Console.WriteLine("Thank you for using FitForge, Goodbye!");
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice. Assuming 'No'.");
+                            yes = false;
+                            break;
+                    }
+                }
+
+            } while (yes);
         }
         public static void Capture()
         {
